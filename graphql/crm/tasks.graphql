@@ -1,0 +1,5 @@
+type Task {
+    id: ID!
+    contact: Contact! @belongsTo
+    due_date: DateTime
+}

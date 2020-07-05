@@ -1,0 +1,7 @@
+type Contact {
+    id: ID!
+    first_name: String!
+    last_name: String!
+    phone: String
+    company_id: ID
+}

@@ -1,6 +1,11 @@
 type Organization {
+    id: ID!
     name: String
     is_permanent: Boolean
+}
+
+extend type Query {
+    organization(id: ID! @eq): Organization @find @can(ability: "view", find: id)
 }
 
 extend type Mutation @middleware(checks:["auth:api"]){

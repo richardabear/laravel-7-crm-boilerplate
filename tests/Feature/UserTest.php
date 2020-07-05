@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Joselfonseca\LighthouseGraphQLPassport\GraphQL\Mutations\Register;
+use Laravel\Passport\Passport;
 use Nuwave\Lighthouse\Testing\MakesGraphQLRequests;
 use RichardAbear\Syndicate\Models\Organization;
 
@@ -34,9 +35,26 @@ class UserTest extends TestCase
         $this->assertEquals('test@gmail.com', $user->email);
     }
 
-    public function testUserHasOrganization(): void
+    public function testUserHasPermanentOrganization(): void
     {
         $user = $this->createUser();
         $this->assertInstanceOf(Organization::class, $user->permanentOrganization());
+    }
+
+    public function testUserCanCreateOrganization(): void
+    {
+        $user = $this->createUser();
+        Passport::actingAs($user);
+
+        $response = $this->graphQL(/** @lang GraphQL */'
+                mutation {
+                    createOrganization(input: {name: "test"}) {
+                        id
+                        name
+                    }
+                }
+        ')->json();
+        $this->expectOutputString('');
+        var_dump($response);
     }
 }

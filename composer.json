@@ -17,7 +17,8 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "nuwave/lighthouse": "^4.15",
-        "richardabear/laravel-syndicate": "@dev"
+        "richardabear/laravel-syndicate": "@dev",
+        "webpatser/laravel-countries": "^1.5"
     },
     "repositories": {
         "richardabear/laravel-syndicate": {

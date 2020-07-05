@@ -1,0 +1,11 @@
+type Address {
+    id: ID!
+    country_id: String
+    contact: Contact @belongsTo
+    is_primary: Boolean!
+    city: String!
+    state: String!
+    zip: String!
+    street_address: String!
+    twilio_verified: Boolean
+}
