@@ -73,15 +73,43 @@ class NotesTest extends AuthenticatedTestCase
         ];
 
         $this->graphQL('
-            mutation updateContact($input: UpdateNoteInput!) {
+            mutation updateNote($input: UpdateNoteInput!) {
                 updateNote(input: $input) {
                     id
                     note
                 }
             }
         ', ['input' => $noteData])->assertJson([
-            'id' => $note->id,
-            'note' => 'New Note Name'
+            'data' => [
+                'updateNote' => [
+                    'id' => $note->id,
+                    'note' => 'New Note Name'
+                ]
+            ]
+        ]);
+    }
+
+    public function testCanQueryDeleteNote()
+    {
+        $note = new Note([
+            'note' => 'Sample',
+            'contact_id' => $this->contact->id
+        ]);
+
+        $note->save();
+
+        $this->graphQL('
+            mutation deleteNote($id: ID!) {
+                deleteNote(id: $id) {
+                    id
+                }
+            }
+        ')->assertJson([
+            'data' => [
+                'deleteNote' => [
+                    'id' => $note->id
+                ]
+            ]
         ]);
     }
 }
