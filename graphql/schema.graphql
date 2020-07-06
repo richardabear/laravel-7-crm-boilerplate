@@ -23,3 +23,4 @@ type User {
 #import syndicate.graphql
 #import ./crm/list.graphql
 #import ./crm/contacts.graphql
+#import ./crm/notes.graphql

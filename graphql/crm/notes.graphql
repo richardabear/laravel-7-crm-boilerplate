@@ -1,4 +1,17 @@
 type Note {
     id: ID!
     contact: Contact @belongsTo
+    contact_id: ID!
+    note: String
+}
+
+extend type Mutation @middleware(checks:["auth:api"]) {
+    createNote(input: CreateNoteInput! @spread): Note
+        @create
+        @can(ability: "update" find:"contact_id" model: Contact)
+}
+
+input CreateNoteInput {
+    contact_id: ID!
+    note: String
 }
