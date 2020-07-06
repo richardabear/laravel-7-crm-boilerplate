@@ -1,15 +1,15 @@
-type Organization {
+type Organization @modelClass(class: "App\\Models\\Organization"){
     id: ID!
     name: String
     is_permanent: Boolean
 }
 
-extend type Query {
+extend type Query @middleware(checks:["auth:api"]) {
     organization(id: ID! @eq): Organization @find @can(ability: "view", find: id)
 }
 
-extend type Mutation @middleware(checks:["auth:api"]){
-    createOrganization(input: OrganizationInput @spread): Organization 
+extend type Mutation @middleware(checks:["auth:api"]) {
+    createOrganization(input: OrganizationInput @spread): Organization
         @create
     updateOrganization(input: OrganizationInput @spread): Organization 
         @update

@@ -1984,16 +1984,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.5.0",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
+                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/53c2753d756f5adb586dca79c2ec0e2654dd9463",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
+                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
                 "shasum": ""
             },
             "require": {
@@ -2032,7 +2032,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-06-03T07:24:19+00:00"
+            "time": "2020-07-02T17:12:47+00:00"
         },
         {
             "name": "nuwave/lighthouse",
@@ -3048,10 +3048,12 @@
             "dist": {
                 "type": "path",
                 "url": "../packages/laravel-syndicate",
-                "reference": "0868d8e724e97117718473b897e10cf233478a6c"
+                "reference": "a70bbc21af2ebb2d6a21ab5bfd99585fa0125906"
             },
             "require": {
+                "illuminate/bus": "^7.18",
                 "illuminate/database": "^7.18",
+                "illuminate/mail": "^7.18",
                 "illuminate/support": "^7.18"
             },
             "type": "library",

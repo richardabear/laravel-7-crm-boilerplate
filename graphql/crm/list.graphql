@@ -1,0 +1,27 @@
+type ContactList {
+    id: ID!
+    name: String
+    organization: Organization @belongsTo
+}
+
+extend type Mutation @middleware(checks:["auth:api"]) {
+    createContactList(input: CreateContactListInput! @spread): ContactList 
+        @create
+        @can(ability: "update" find:"organization_id" model:"App\\Models\\Organization")
+    updateContactList(input: UpdateContactListInput! @spread): ContactList
+        @update
+        @can(ability: "update" find: "id")
+    deleteContactList(id: ID!): ContactList
+        @delete
+        @can(ability: "delete" find: "id")
+}
+
+input CreateContactListInput {
+    name: String!
+    organization_id: ID!
+}
+
+input UpdateContactListInput {
+    id: ID! @eq
+    name: String
+}

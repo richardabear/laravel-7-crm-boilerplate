@@ -1,7 +1,51 @@
 type Contact {
     id: ID!
-    first_name: String!
-    last_name: String!
-    phone: String
-    company_id: ID
+    first_name: String
+    last_name: String
+    email: String
+    phone_number: String
+    date_of_birth: String
+    status: String
+    mobile_number: String
+    country_id: ID!
+    fax: String
+    organization_id: ID!
+}
+
+extend type Mutation @middleware(checks:["auth:api"]) {
+    createContact(input: CreateContactInput! @spread): Contact
+        @create
+        @can(ability: "update" find:"organization_id" model:"App\\Models\\Organization")
+    updateContact(input: UpdateContactInput! @spread): Contact
+        @update
+        @can(ability: "update" find:"id")
+    deleteContact(id: ID! @eq): Contact
+        @delete
+        @can(ability: "delete" find: "id")
+} 
+
+input CreateContactInput {
+    first_name: String
+    last_name: String
+    email: String
+    phone_number: String
+    date_of_birth: String
+    status: String
+    mobile_number: String
+    country_id: ID!
+    fax: String
+    organization_id: ID!
+}
+
+input UpdateContactInput {
+    id: ID! @eq
+    first_name: String
+    last_name: String
+    email: String
+    phone_number: String
+    date_of_birth: String
+    status: String
+    mobile_number: String
+    country_id: ID
+    fax: String
 }

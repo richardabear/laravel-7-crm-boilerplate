@@ -7,6 +7,12 @@ use RichardAbear\Syndicate\Models\Organization;
 
 class ContactList extends Model
 {
+    protected $primaryKey = 'id';
+    
+    protected $fillable = [
+        'name', 'organization_id'
+    ];
+
     //
     public function organization()
     {

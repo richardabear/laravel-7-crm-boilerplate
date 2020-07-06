@@ -51,10 +51,16 @@ class UserTest extends TestCase
                     createOrganization(input: {name: "test"}) {
                         id
                         name
+                        is_permanent
                     }
                 }
-        ')->json();
-        $this->expectOutputString('');
-        var_dump($response);
+        ')->assertJson([
+            'data'=> [
+                'createOrganization' => [
+                    'name' => 'test',
+                    'is_permanent' => false
+                ]
+            ]
+        ]);
     }
 }

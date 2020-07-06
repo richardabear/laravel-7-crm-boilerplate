@@ -13,7 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User(['name' => 'Richard Abear', 'email' => 'richard@bearzu.com', 'password' => Hash::make('password')]);
-        $user->save();
+        try {
+            $user = new User(['name' => 'Richard Abear', 'email' => 'richard@bearzu.com', 'password' => Hash::make('password')]);
+            $user->save();
+        } catch (\Exception $e) {
+            // Duplicate user exception
+        }
     }
 }
