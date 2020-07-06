@@ -104,7 +104,7 @@ class NotesTest extends AuthenticatedTestCase
                     id
                 }
             }
-        ')->assertJson([
+        ', ['id' => $note->id])->assertJson([
             'data' => [
                 'deleteNote' => [
                     'id' => $note->id
