@@ -9,9 +9,17 @@ extend type Mutation @middleware(checks:["auth:api"]) {
     createNote(input: CreateNoteInput! @spread): Note
         @create
         @can(ability: "update" find:"contact_id" model: Contact)
+    updateNote(input: UpdateNoteInput! @spread): Note
+        @update
+        @can(ability: "update" find: "id")
 }
 
 input CreateNoteInput {
     contact_id: ID!
+    note: String
+}
+
+input UpdateNoteInput {
+    id: ID! @eq
     note: String
 }

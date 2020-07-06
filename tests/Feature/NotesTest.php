@@ -58,4 +58,30 @@ class NotesTest extends AuthenticatedTestCase
             ]
         ]);
     }
+
+    public function testCanQueryUpdateNote()
+    {
+        $note = new Note([
+            'note' => 'New Note',
+            'contact_id' => $this->contact->id
+        ]);
+        $note->save();
+
+        $noteData = [
+            'id' => $note->id,
+            'note' => 'New Note Name',
+        ];
+
+        $this->graphQL('
+            mutation updateContact($input: UpdateNoteInput!) {
+                updateNote(input: $input) {
+                    id
+                    note
+                }
+            }
+        ', ['input' => $noteData])->assertJson([
+            'id' => $note->id,
+            'note' => 'New Note Name'
+        ]);
+    }
 }
