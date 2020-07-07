@@ -16,10 +16,13 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('contact_id');
-            $table->string('street_address');
-            $table->string('state');
-            $table->string('city');
-            $table->string('zip');
+            $table->bigInteger('country_id')->nullable();
+            $table->string('street_address')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->boolean('is_primary')->default(false);
+            $table->boolean('twilio_verified')->default(false);
             $table->timestamps();
         });
     }

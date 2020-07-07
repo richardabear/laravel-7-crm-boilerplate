@@ -24,3 +24,4 @@ type User {
 #import ./crm/list.graphql
 #import ./crm/contacts.graphql
 #import ./crm/notes.graphql
+#import ./crm/address.graphql
