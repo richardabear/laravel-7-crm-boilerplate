@@ -10,7 +10,8 @@ class ContactList extends Model
     protected $primaryKey = 'id';
     
     protected $fillable = [
-        'name', 'organization_id'
+        'name',
+        'organization_id'
     ];
 
     //

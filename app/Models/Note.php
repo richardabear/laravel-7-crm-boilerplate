@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    protected $fillable = ['note', 'contact_id'];
+    protected $fillable = [
+        'note',
+        'contact_id'
+    ];
     
     public function contact()
     {
