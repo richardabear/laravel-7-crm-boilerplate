@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Address;
 use App\Models\Contact;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\AuthenticatedTestCase;
 
 class AddressTest extends AuthenticatedTestCase
@@ -99,5 +100,35 @@ class AddressTest extends AuthenticatedTestCase
 
         $address->refresh();
         $this->assertEquals($address->street_address, '123 street at village');
+    }
+
+    public function testCanQueryDeleteAddress()
+    {
+        $address = new Address([
+            'contact_id' => $this->contact->id,
+            'street_address' => 'Sample'
+        ]);
+
+        $address->save();
+
+        $this->assertEquals('Sample', $address->street_address);
+
+        $this->graphQL('
+            mutation deleteAddress($id: ID!) {
+                deleteAddress(id: $id) {
+                    id   
+                }
+            }
+        ', ['id' => $address->id])->assertJson([
+            'data' => [
+                'deleteAddress' => [
+                    'id' => $address->id
+                ]
+            ]
+        ]);
+
+        // Check that the address is deleted
+        $this->expectException(ModelNotFoundException::class);
+        $address->refresh();
     }
 }

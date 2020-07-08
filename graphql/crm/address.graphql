@@ -18,6 +18,9 @@ extend type Mutation @middleware(checks:["auth:api"]) {
     updateAddress(input: UpdateAddressInput! @spread): Address
         @update
         @can(ability: "update" find: "id")
+    deleteAddress(id: ID!): Address
+        @delete
+        @can(ability: "delete" find: "id")
 }
 
 input CreateAddressInput {
