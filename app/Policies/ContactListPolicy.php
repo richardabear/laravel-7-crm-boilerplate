@@ -10,16 +10,6 @@ class ContactListPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     public function update(User $user, ContactList $list)
     {
         return $user->belongsToOrganization($list->organization_id);
