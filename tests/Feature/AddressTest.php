@@ -64,4 +64,40 @@ class AddressTest extends AuthenticatedTestCase
             ]
         ]);
     }
+
+    public function testCanQueryUpdateAddress()
+    {
+        $address = new Address([
+            'street_address' => 'Sample Address',
+            'city' => 'Davao',
+            'state' => 'Davao Del Sur',
+            'contact_id' => $this->contact->id
+        ]);
+
+        $address->save();
+        $this->assertEquals($address->street_address, 'Sample Address');
+        
+        $inputData = [
+            'id' => $address->id,
+            'street_address' => '123 street at village'
+        ];
+
+        $this->graphQL('
+            mutation updateAddress($input: UpdateAddressInput!) {
+                updateAddress(input: $input) {
+                    id
+                    street_address
+                    state
+                    city
+                }
+            }
+        ', ['input' => $inputData])->assertJson([
+            'data' => [
+                'updateAddress' => $inputData
+            ]
+        ]);
+
+        $address->refresh();
+        $this->assertEquals($address->street_address, '123 street at village');
+    }
 }

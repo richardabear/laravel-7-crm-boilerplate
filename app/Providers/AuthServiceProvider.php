@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
 use App\Models\Contact;
 use App\Models\ContactList;
 use App\Models\Note;
+use App\Policies\AddressPolicy;
 use App\Policies\ContactListPolicy;
 use App\Policies\ContactPolicy;
 use App\Policies\NotePolicy;
@@ -23,7 +25,8 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Contact::class => ContactPolicy::class,
         Note::class => NotePolicy::class,
-        ContactList::class => ContactListPolicy::class
+        ContactList::class => ContactListPolicy::class,
+        Address::class => AddressPolicy::class
     ];
 
     /**

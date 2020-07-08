@@ -15,11 +15,25 @@ extend type Mutation @middleware(checks:["auth:api"]) {
     createAddress(input: CreateAddressInput! @spread): Address
         @create
         @can(ability: "update" find: "contact_id" model: Contact)
+    updateAddress(input: UpdateAddressInput! @spread): Address
+        @update
+        @can(ability: "update" find: "id")
 }
 
 input CreateAddressInput {
     country_id: ID
     contact_id: ID!
+    is_primary: Boolean
+    city: String
+    state: String
+    zip: String
+    street_address: String
+    twilio_verified: Boolean
+}
+
+input UpdateAddressInput {
+    id: ID! @eq
+    country_id: ID
     is_primary: Boolean
     city: String
     state: String

@@ -15,7 +15,7 @@ class Address extends Model
     ];
 
 
-    public function contacts()
+    public function contact()
     {
         return $this->belongsTo(Contact::class);
     }
